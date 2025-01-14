@@ -2,22 +2,22 @@
 using namespace std;
 
 int main() {
-    int Tableroixj = 10;
-    char matriz[10][10];
+   const int Tableroixj = 10; 
+    char matriz[Tableroixj][Tableroixj];
 
     for (int i = 0; i < Tableroixj; i++) {
         for (int j = 0; j < Tableroixj; j++) {
-            matriz[i][j] = '~' ;
+            matriz[i][j] = '~' ; 
         }
     }
 
-    for (int i = 0; i < Tableroixj; i++) {
+    for (int i = 0; i < Tableroixj; i++) { 
 
-        for (int j = 0; j < Tableroixj; j++) {
-            cout << matriz[i][j] << " ";
+        for (int j = 0; j < Tableroixj; j++) { 
+            cout << matriz[i][j] << " "; 
         }
 
-        cout << endl;
+        cout << endl; 
     }
     
 }
