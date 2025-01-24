@@ -30,23 +30,32 @@ int main() {
     cout << "Tablero jugador 2: " << endl;
     char TableroJugador2[Tableroixj][Tableroixj];
     bool orientacion = rand() % 2;  
+    int tamañoBarco = 3;
+
 
     for (int i = 0; i < Tableroixj; i++) {
         for (int j = 0; j < Tableroixj; j++) {
             TableroJugador2[i][j] = '~';
+        }
+} 
 
-            if (orientacion == 0) {
-                for (int i = 0; i < 3; i++) {
-                        TableroJugador2[i][0] = '3'; 
-                }
-            }
-            else {
-                    for (int j = 0; j < 3; j++) {
-                        TableroJugador2[0][j] = '3'; 
-                }
-            }
+
+ if (orientacion == 1) { 
+        int filaInicial = rand() % Tableroixj; 
+        int columnaInicial = rand() % (Tableroixj - tamañoBarco + 1); 
+        for (int j = 0; j < tamañoBarco; j++) {
+            TableroJugador2[filaInicial][columnaInicial + j] = '3';
+        }
+    } else { // Vertical
+        int filaInicial = rand() % (Tableroixj - tamañoBarco + 1); 
+        int columnaInicial = rand() % Tableroixj; 
+        for (int i = 0; i < tamañoBarco; i++) {
+            TableroJugador2[filaInicial + i][columnaInicial] = '3';
         }
     }
+    
+
+
 
     for (int i = 0; i < Tableroixj; i++) {
 
@@ -58,3 +67,5 @@ int main() {
     }
 
 }
+
+
