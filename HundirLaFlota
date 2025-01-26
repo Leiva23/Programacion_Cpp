@@ -69,3 +69,112 @@ int main() {
 }
 
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#include <iostream>
+#include <time.h>
+using namespace std;
+
+int main() {
+    const int Tableroixj = 10;
+    srand(time(NULL));
+
+    cout << "Tablero jugador 1: " << endl;
+    char TableroJugador1[Tableroixj][Tableroixj];
+
+    for (int i = 0; i < Tableroixj; i++) {
+        for (int j = 0; j < Tableroixj; j++) {
+            TableroJugador1[i][j] = '~';
+        }
+    }
+
+    for (int i = 0; i < Tableroixj; i++) {
+
+        for (int j = 0; j < Tableroixj; j++) {
+            cout << TableroJugador1[i][j] << " ";
+        }
+
+        cout << endl;
+    }
+
+    cout << endl;
+
+
+    cout << "Tablero jugador 2: " << endl;
+    char TableroJugador2[Tableroixj][Tableroixj];
+
+    for (int i = 0; i < Tableroixj; i++) {
+        for (int j = 0; j < Tableroixj; j++) {
+            TableroJugador2[i][j] = '~';
+        }
+    }
+
+    for (int i = 3; i <= 6; i++) {
+        bool colision = false;
+        bool posicionado = false;
+        char tamañoBarco = i + '0';
+
+        while (!posicionado) {
+            int filaInicial = rand() % Tableroixj;
+            int columnaInicial = rand() % Tableroixj;
+            int orientacion = rand() % 2;
+            bool valido = true;
+
+
+            if (orientacion == 0) {  // Horizontal
+                if (columnaInicial + i > Tableroixj) {  // Verificar si el barco se sale del borde derecho
+                    valido = false;
+                }
+            }
+            else {  
+                if (filaInicial + i > Tableroixj) {  // Verificar si el barco se sale del borde inferior
+                    valido = false;
+                }
+            }
+
+            if (valido) {
+                colision = false;
+
+
+                    if (orientacion == 0) {
+                        for (int j = 0; j < i; j++) {
+                            if (TableroJugador2[filaInicial][columnaInicial + j] != '~') {
+                                colision = true;
+                                break;
+                            }
+                        }
+                        if (!colision) {
+                            for (int j = 0; j < i; j++) {
+                                TableroJugador2[filaInicial][columnaInicial + j] = tamañoBarco;
+                            }
+                            posicionado = true;
+
+                        }
+                        else {
+                            for (int j = 0; j < i; j++) {
+                                if (TableroJugador2[filaInicial][columnaInicial + j] != '~') {
+                                    colision = true;
+                                    break;
+                                }
+                            }
+                            if (!colision) {
+                                for (int j = 0; j < i; j++) {
+                                    TableroJugador2[filaInicial][columnaInicial + j] = tamañoBarco;
+                                }
+                                posicionado = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    
+        for (int i = 0; i < Tableroixj; i++) {
+
+            for (int j = 0; j < Tableroixj; j++) {
+                cout << TableroJugador2[i][j] << " ";
+            }
+
+            cout << endl;
+        }
+}
+
