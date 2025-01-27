@@ -4,78 +4,6 @@ using namespace std;
 
 int main() {
     const int Tableroixj = 10;
-    srand(time(NULL)); 
-
-    cout << "Tablero jugador 1: " << endl;
-    char TableroJugador1[Tableroixj][Tableroixj];
-
-    for (int i = 0; i < Tableroixj; i++) {
-        for (int j = 0; j < Tableroixj; j++) {
-            TableroJugador1[i][j] = '~';
-        }
-    }
-
-    for (int i = 0; i < Tableroixj; i++) {
-
-        for (int j = 0; j < Tableroixj; j++) {
-            cout << TableroJugador1[i][j] << " ";
-        }
-
-        cout << endl;
-    }
-
-    cout << endl;
-
-
-    cout << "Tablero jugador 2: " << endl;
-    char TableroJugador2[Tableroixj][Tableroixj];
-    bool orientacion = rand() % 2;  
-    int tamañoBarco = 3;
-
-
-    for (int i = 0; i < Tableroixj; i++) {
-        for (int j = 0; j < Tableroixj; j++) {
-            TableroJugador2[i][j] = '~';
-        }
-} 
-
-
- if (orientacion == 1) { 
-        int filaInicial = rand() % Tableroixj; 
-        int columnaInicial = rand() % (Tableroixj - tamañoBarco + 1); 
-        for (int j = 0; j < tamañoBarco; j++) {
-            TableroJugador2[filaInicial][columnaInicial + j] = '3';
-        }
-    } else { // Vertical
-        int filaInicial = rand() % (Tableroixj - tamañoBarco + 1); 
-        int columnaInicial = rand() % Tableroixj; 
-        for (int i = 0; i < tamañoBarco; i++) {
-            TableroJugador2[filaInicial + i][columnaInicial] = '3';
-        }
-    }
-    
-
-
-
-    for (int i = 0; i < Tableroixj; i++) {
-
-        for (int j = 0; j < Tableroixj; j++) {
-            cout << TableroJugador2[i][j] << " ";
-        }
-
-        cout << endl;
-    }
-
-}
-
-
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#include <iostream>
-#include <time.h>
-using namespace std;
-
-int main() {
-    const int Tableroixj = 10;
     srand(time(NULL));
 
     cout << "Tablero jugador 1: " << endl;
@@ -101,7 +29,6 @@ int main() {
 
     cout << "Tablero jugador 2: " << endl;
     char TableroJugador2[Tableroixj][Tableroixj];
-
     for (int i = 0; i < Tableroixj; i++) {
         for (int j = 0; j < Tableroixj; j++) {
             TableroJugador2[i][j] = '~';
@@ -109,7 +36,6 @@ int main() {
     }
 
     for (int i = 3; i <= 6; i++) {
-        bool colision = false;
         bool posicionado = false;
         char tamañoBarco = i + '0';
 
@@ -132,9 +58,7 @@ int main() {
             }
 
             if (valido) {
-                colision = false;
-
-
+                bool colision = false;
                     if (orientacion == 0) {
                         for (int j = 0; j < i; j++) {
                             if (TableroJugador2[filaInicial][columnaInicial + j] != '~') {
@@ -147,26 +71,27 @@ int main() {
                                 TableroJugador2[filaInicial][columnaInicial + j] = tamañoBarco;
                             }
                             posicionado = true;
-
                         }
-                        else {
-                            for (int j = 0; j < i; j++) {
-                                if (TableroJugador2[filaInicial][columnaInicial + j] != '~') {
-                                    colision = true;
-                                    break;
+                 }
+                    else {
+                        for (int k = 0; k < i; k++) {
+                            if (TableroJugador2[filaInicial + k][columnaInicial] != '~') {
+                                colision = true;
+                                break;
                                 }
                             }
+                            
                             if (!colision) {
-                                for (int j = 0; j < i; j++) {
-                                    TableroJugador2[filaInicial][columnaInicial + j] = tamañoBarco;
-                                }
-                                posicionado = true;
+                            for (int k = 0; k < i; k++) {
+                                TableroJugador2[filaInicial + k][columnaInicial] = tamañoBarco;
                             }
+                            posicionado = true;
+                        }
                         }
                     }
                 }
-            }
-        }
+             }
+        
     
         for (int i = 0; i < Tableroixj; i++) {
 
@@ -177,4 +102,3 @@ int main() {
             cout << endl;
         }
 }
-
