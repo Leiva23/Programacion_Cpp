@@ -14,7 +14,63 @@ int main() {
             TableroJugador1[i][j] = '~';
         }
     }
+    for (int i = 3; i <= 6; i++) {
+        bool posicionado = false;
+        char tamañoBarco = i + '0';
 
+        while (!posicionado) {
+            int filaInicial = rand() % Tableroixj;
+            int columnaInicial = rand() % Tableroixj;
+            int orientacion = rand() % 2;
+            bool valido = true;
+
+
+            if (orientacion == 0) {
+                if (columnaInicial + i > Tableroixj) {
+                    valido = false;
+                }
+            }
+            else {
+                if (filaInicial + i > Tableroixj) {
+                    valido = false;
+                }
+            }
+
+            if (valido) {
+                bool colision = false;
+                if (orientacion == 0) {
+                    for (int j = 0; j < i; j++) {
+                        if (TableroJugador1[filaInicial][columnaInicial + j] != '~') {
+                            colision = true;
+                            break;
+                        }
+                    }
+                    if (!colision) {
+                        for (int j = 0; j < i; j++) {
+                            TableroJugador1[filaInicial][columnaInicial + j] = tamañoBarco;
+                        }
+                        posicionado = true;
+                    }
+
+                }
+                else {
+                    for (int k = 0; k < i; k++) {
+                        if (TableroJugador1[filaInicial + k][columnaInicial] != '~') {
+                            colision = true;
+                            break;
+                        }
+                    }
+
+                    if (!colision) {
+                        for (int k = 0; k < i; k++) {
+                            TableroJugador1[filaInicial + k][columnaInicial] = tamañoBarco;
+                        }
+                        posicionado = true;
+                    }
+                }
+            }
+        }
+    }
     for (int i = 0; i < Tableroixj; i++) {
 
         for (int j = 0; j < Tableroixj; j++) {
@@ -24,7 +80,7 @@ int main() {
         cout << endl;
     }
 
-    cout << endl;
+    cout << endl << endl;
 
 
     cout << "Tablero jugador 2: " << endl;
@@ -46,59 +102,147 @@ int main() {
             bool valido = true;
 
 
-            if (orientacion == 0) {  // Horizontal
-                if (columnaInicial + i > Tableroixj) {  // Verificar si el barco se sale del borde derecho
+            if (orientacion == 0) {
+                if (columnaInicial + i > Tableroixj) {
                     valido = false;
                 }
             }
-            else {  
-                if (filaInicial + i > Tableroixj) {  // Verificar si el barco se sale del borde inferior
+            else {
+                if (filaInicial + i > Tableroixj) {
                     valido = false;
                 }
             }
 
             if (valido) {
                 bool colision = false;
-                    if (orientacion == 0) {
-                        for (int j = 0; j < i; j++) {
-                            if (TableroJugador2[filaInicial][columnaInicial + j] != '~') {
-                                colision = true;
-                                break;
-                            }
-                        }
-                        if (!colision) {
-                            for (int j = 0; j < i; j++) {
-                                TableroJugador2[filaInicial][columnaInicial + j] = tamañoBarco;
-                            }
-                            posicionado = true;
-                        }
-                 }
-                    else {
-                        for (int k = 0; k < i; k++) {
-                            if (TableroJugador2[filaInicial + k][columnaInicial] != '~') {
-                                colision = true;
-                                break;
-                                }
-                            }
-                            
-                            if (!colision) {
-                            for (int k = 0; k < i; k++) {
-                                TableroJugador2[filaInicial + k][columnaInicial] = tamañoBarco;
-                            }
-                            posicionado = true;
-                        }
+                if (orientacion == 0) {
+                    for (int j = 0; j < i; j++) {
+                        if (TableroJugador2[filaInicial][columnaInicial + j] != '~') {
+                            colision = true;
+                            break;
                         }
                     }
-                }
-             }
-        
-    
-        for (int i = 0; i < Tableroixj; i++) {
+                    if (!colision) {
+                        for (int j = 0; j < i; j++) {
+                            TableroJugador2[filaInicial][columnaInicial + j] = tamañoBarco;
+                        }
+                        posicionado = true;
+                    }
 
-            for (int j = 0; j < Tableroixj; j++) {
-                cout << TableroJugador2[i][j] << " ";
+                }
+                else {
+                    for (int k = 0; k < i; k++) {
+                        if (TableroJugador2[filaInicial + k][columnaInicial] != '~') {
+                            colision = true;
+                            break;
+                        }
+                    }
+
+                    if (!colision) {
+                        for (int k = 0; k < i; k++) {
+                            TableroJugador2[filaInicial + k][columnaInicial] = tamañoBarco;
+                        }
+                        posicionado = true;
+                    }
+                }
+            }
+        }
+    }
+
+
+    for (int i = 0; i < Tableroixj; i++) {
+
+        for (int j = 0; j < Tableroixj; j++) {
+            cout << TableroJugador2[i][j] << " ";
+        }
+
+        cout << endl;
+    }
+
+    system("pause");
+    system("cls");
+
+    bool gameplay = true;
+    bool acierto = false;
+    while (gameplay) {
+        int fila;
+        int columna;
+        bool turno = true;
+
+        
+        while (turno) {
+            cout << "Turno Jugador 1" << endl;
+            for (int i = 0; i < Tableroixj; i++) { 
+                for (int j = 0; j < Tableroixj; j++) { 
+                    if (TableroJugador2[i][j] != '~') { 
+                        cout << "~"; 
+                    }
+                    else {
+                        cout << TableroJugador2[i][j]; 
+                    }
+                    if (j < Tableroixj - 1)
+                    {
+                        cout << " ";
+                    }
+
+                }
+                cout << endl;
+            }
+            cout << "Introduce una fila (0-9): " << endl;
+            cin >> fila;
+
+            if (fila < 0 || fila >= Tableroixj) {
+                cout << "Disparo fuera del tablero (ERROR EN FILA)" << endl;
+                break;
+
+            }
+            else {
+                acierto = true;
             }
 
-            cout << endl;
+
+            cout << "Introduce una columna (0-9): " << endl;
+            cin >> columna;
+
+            if (columna < 0 || columna >= Tableroixj) {
+                cout << "Disparo fuera del tablero (ERROR EN COLUMNA)" << endl;
+                break;
+
+            }
+            else {
+                acierto = true;
+            }
+
+            if (acierto) {
+
+                if (TableroJugador2[fila][columna] == '~') {
+                    cout << "¡Fallaste!" << endl;
+                    TableroJugador2[fila][columna] = 'X';
+                    turno = false;
+
+                }
+                else if (TableroJugador2[fila][columna] != 'X' && TableroJugador2[fila][columna] != 'O') {
+                    cout << "¡Acertaste!" << endl;
+                    TableroJugador2[fila][columna] = 'O';
+
+                    turno = false;
+                }
+                else {
+                    cout << "Ya disparaste en esa posicion, vuelve a probar" << endl;
+                    turno = true;
+                }
+
+            }
+
+
         }
+
+
+    }
 }
+
+
+
+
+
+
