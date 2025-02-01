@@ -169,16 +169,17 @@ int main() {
         int columna;
         bool turno = true;
 
-        
+
         while (turno) {
             cout << "Turno Jugador 1" << endl;
-            for (int i = 0; i < Tableroixj; i++) { 
-                for (int j = 0; j < Tableroixj; j++) { 
-                    if (TableroJugador2[i][j] != '~') { 
-                        cout << "~"; 
+            for (int i = 0; i < Tableroixj; i++) {
+                for (int j = 0; j < Tableroixj; j++) {
+                    if (TableroJugador2[i][j] == 'X' || TableroJugador2[i][j] == 'O') {
+                        cout << TableroJugador2[i][j];
+
                     }
                     else {
-                        cout << TableroJugador2[i][j]; 
+                        cout << '~';
                     }
                     if (j < Tableroixj - 1)
                     {
@@ -188,6 +189,7 @@ int main() {
                 }
                 cout << endl;
             }
+
             cout << "Introduce una fila (0-9): " << endl;
             cin >> fila;
 
@@ -233,16 +235,79 @@ int main() {
                 }
 
             }
-
-
         }
+
+        turno = true;
+        acierto = false;
+        while (turno) {
+            cout << "Turno Jugador 2" << endl;
+            for (int i = 0; i < Tableroixj; i++) {
+                for (int j = 0; j < Tableroixj; j++) {
+                    if (TableroJugador1[i][j] == 'X' || TableroJugador1[i][j] == 'O') {
+                        cout << TableroJugador1[i][j];
+
+                    }
+                    else {
+                        cout << '~';
+                    }
+                    if (j < Tableroixj - 1)
+                    {
+                        cout << " ";
+                    }
+
+                }
+                cout << endl;
+            }
+            cout << "Introduce una fila (0-9): " << endl;
+            cin >> fila;
+
+            if (fila < 0 || fila >= Tableroixj) {
+                cout << "Disparo fuera del tablero (ERROR EN FILA)" << endl;
+                break;
+
+            }
+            else {
+                acierto = true;
+            }
+
+
+            cout << "Introduce una columna (0-9): " << endl;
+            cin >> columna;
+
+            if (columna < 0 || columna >= Tableroixj) {
+                cout << "Disparo fuera del tablero (ERROR EN COLUMNA)" << endl;
+                break;
+
+            }
+            else {
+                acierto = true;
+            }
+
+            if (acierto) {
+
+                if (TableroJugador1[fila][columna] == '~') {
+                    cout << "¡Fallaste!" << endl;
+                    TableroJugador1[fila][columna] = 'X';
+                    turno = false;
+
+                }
+                else if (TableroJugador1[fila][columna] != 'X' && TableroJugador1[fila][columna] != 'O') {
+                    cout << "¡Acertaste!" << endl;
+                    TableroJugador1[fila][columna] = 'O';
+
+                    turno = false;
+                }
+                else {
+                    cout << "Ya disparaste en esa posicion, vuelve a probar" << endl;
+                    turno = true;
+                }
+
+            }
+        }
+        turno = false;
 
 
     }
 }
-
-
-
-
 
 
