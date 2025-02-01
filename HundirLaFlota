@@ -190,30 +190,24 @@ int main() {
                 cout << endl;
             }
 
-            cout << "Introduce una fila (0-9): " << endl;
-            cin >> fila;
-
-            if (fila < 0 || fila >= Tableroixj) {
-                cout << "Disparo fuera del tablero (ERROR EN FILA)" << endl;
-                break;
-
-            }
-            else {
-                acierto = true;
-            }
+            do {
+                cout << "Introduce una fila (1-10): " << endl;
+                cin >> fila;
+                fila--;
+                cout << "Introduce una columna (1-10): " << endl;
+                cin >> columna;
+                columna--;
 
 
-            cout << "Introduce una columna (0-9): " << endl;
-            cin >> columna;
+                if (fila < 0 || fila >= Tableroixj || columna < 0 || columna >= Tableroixj) {
+                    cout << "Disparo fuera del tablero (ERROR EN FILA)" << endl;
+                    acierto = false;
+                }
+                else {
+                    acierto = true;
 
-            if (columna < 0 || columna >= Tableroixj) {
-                cout << "Disparo fuera del tablero (ERROR EN COLUMNA)" << endl;
-                break;
-
-            }
-            else {
-                acierto = true;
-            }
+                }
+            } while (acierto == false);
 
             if (acierto) {
 
@@ -258,30 +252,23 @@ int main() {
                 }
                 cout << endl;
             }
-            cout << "Introduce una fila (0-9): " << endl;
-            cin >> fila;
-
-            if (fila < 0 || fila >= Tableroixj) {
-                cout << "Disparo fuera del tablero (ERROR EN FILA)" << endl;
-                break;
-
-            }
-            else {
-                acierto = true;
-            }
+            do {
+                cout << "Introduce una fila (1-10): " << endl;
+                cin >> fila;
+                fila--;
+                cout << "Introduce una columna (1-10): " << endl;
+                cin >> columna;
+                columna--;
 
 
-            cout << "Introduce una columna (0-9): " << endl;
-            cin >> columna;
-
-            if (columna < 0 || columna >= Tableroixj) {
-                cout << "Disparo fuera del tablero (ERROR EN COLUMNA)" << endl;
-                break;
-
-            }
-            else {
-                acierto = true;
-            }
+                if (fila < 0 || fila >= Tableroixj || columna < 0 || columna >= Tableroixj) {
+                    cout << "Disparo fuera del tablero (ERROR EN FILA)" << endl;
+                    acierto = false;
+                }
+                else {
+                    acierto = true;
+                }
+            } while (acierto == false);
 
             if (acierto) {
 
@@ -306,8 +293,9 @@ int main() {
         }
         turno = false;
 
-
+       
+        }
     }
-}
+
 
 
