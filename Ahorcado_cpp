@@ -1,0 +1,119 @@
+#include <iostream>
+#include <string>
+#include <time.h>
+using namespace std;
+
+void main() {
+	srand(time(NULL));
+	string palabras[3]{ "hola", "pelota", "programacion" };
+	int palabrasUsadas[3]{ 1, 1, 1 }; // para que no se repitan las palabras les asigno un numero
+	char letra;
+	short rondas = 3;
+	short rondasPerdidas = 0;
+	short rondasGanadas = 0;
+	for (int i = 0; i < rondas; i++) {
+		short indice;
+
+		do {
+			indice = rand() % 3;
+		} while (palabrasUsadas == 0); // si el numero es 0 de la palabra, ya esta usada para que no se repita, se le añadira 0 al final de cada turno
+
+		string palabraRandom = palabras[indice];
+		short intentos = palabraRandom.length();
+		bool aceptable = false;
+
+		char tablero[12]; // las arrays no pueden almacenar contenidos que sean variables, por lo tanto le he asignado el numero de letras de la palabra mas larga
+
+		for (int i = 0; i < palabraRandom.length(); i++) {
+			tablero[i] = '_'; // inicializo un tablero el qual es igual de largo que el numero de letras tenga la palabra random
+		}
+
+		system("cls"); // limpio la pantalla
+		cout << "La palabra a adivinar en esta ronda es: " << palabraRandom << endl;
+		system("pause"); // pauso la ejecucion hasta que el usuario pulse una tecla
+		system("cls");
+
+		while (intentos > 0) {
+			do {
+				cout << "Introduce una letra: " << endl;
+				cin >> letra;
+
+				if (letra >= 65 && letra <= 90) {
+					letra += 32; // +32 ya que es la diferencia entre la misma letra en mayuscualas y minuscuals en la tabla ASCII
+					aceptable = true;
+				}
+				else if (letra >= 97 && letra <= 122) {
+					aceptable = true;
+				}
+				else {
+					cout << "El caracter introducido no es una letra aceptable" << endl;
+					aceptable = false;
+				}
+			} while (!aceptable);
+
+
+			bool superpuesto = false;
+			bool acierto = false; // igual a false para que no se vea afectado en la misma ronda
+			for (int i = 0; i < palabraRandom.length(); i++) {
+				if (palabraRandom[i] == letra && tablero[i] == '_') { // el caracter es cierto y no se ha introducido antes
+					tablero[i] = letra;
+					cout << tablero[i];
+					acierto = true;
+				}
+				else if (palabraRandom[i] == letra && tablero[i] != '_') { // el caracter es cierto pero ya ha sido introducido
+					tablero[i] = letra;
+					cout << tablero[i];
+					acierto = true;
+					superpuesto = true;
+
+				}
+				else {
+					cout << tablero[i]; // no añado el acierto = false, ya que el funcionamiento del programa se veria afectado, ya que unicamente daria la letra por cierta si la letra acertada es la ultima
+				}
+				cout << " ";
+			}
+
+			if (acierto == true && superpuesto == true) {
+				cout << "Ya has escrito esta letra anteriormente! Intentos restantes: " << intentos << endl;
+			}
+			else if (acierto == true) {
+				cout << "Correcto, has adivinado una letra! Intentos restantes: " << intentos << endl;
+			}
+
+			if (!acierto) {
+				intentos--;
+				cout << "Vaya, te has equivocado. Intentos Restantes: " << intentos << endl;
+			}if (intentos == 0) {
+				rondasPerdidas++;
+				cout << "Te has quedado sin intentos! " << endl;
+				cout << "Palabras adivinadas: " << rondasGanadas << endl << "Palabras falladas: " << rondasPerdidas << endl;
+				palabrasUsadas[indice] = 0;
+				break;
+			}
+
+			short letrasAcertadas = 0; // pongo a 0 la variable para que no queden almacenadas de turnos anteriores
+			for (int i = 0; i < palabraRandom.length(); i++) {
+				if (tablero[i] != '_') {
+					letrasAcertadas++;
+				}
+			}
+			if (letrasAcertadas == palabraRandom.length()) {
+				rondasGanadas++;
+				palabrasUsadas[indice] = 0;
+				cout << "Felicidades, has acertado la palabra!" << endl;
+				cout << "Palabras adivinadas: " << rondasGanadas << endl << "Palabras falladas: " << rondasPerdidas << endl;
+				break;
+			}
+		}
+
+		if (rondasGanadas == 2) {
+			cout << "Felicidades! Has ganado la partida!" << endl;
+			break;
+		}
+		else if (rondasPerdidas == 2) {
+			cout << "Vaya, has perdido la partida. Buena suerte en el proximo intento!" << endl;
+			break;
+		}
+
+	}
+}
