@@ -164,12 +164,13 @@ int main() {
 
     bool gameplay = true;
     bool acierto = false;
+    short aciertosJ1 = 0;
+    short aciertosJ2 = 0;
     while (gameplay) {
         int fila;
         int columna;
         bool turno = true;
-
-
+       
         while (turno) {
             cout << "Turno Jugador 1" << endl;
             for (int i = 0; i < Tableroixj; i++) {
@@ -220,6 +221,7 @@ int main() {
                 else if (TableroJugador2[fila][columna] != 'X' && TableroJugador2[fila][columna] != 'O') {
                     cout << "¡Acertaste!" << endl;
                     TableroJugador2[fila][columna] = 'O';
+                    aciertosJ1++;
 
                     turno = false;
                 }
@@ -280,6 +282,7 @@ int main() {
                 }
                 else if (TableroJugador1[fila][columna] != 'X' && TableroJugador1[fila][columna] != 'O') {
                     cout << "¡Acertaste!" << endl;
+                    aciertosJ2++; 
                     TableroJugador1[fila][columna] = 'O';
 
                     turno = false;
@@ -293,9 +296,14 @@ int main() {
         }
         turno = false;
 
-       
+        if (aciertosJ1 == 18) {
+            cout << "Has ganado la partida Jugador 1!";
+            break;
+        }
+        else if (aciertosJ2 == 18) {
+            cout << "Has ganado la partida Jugador 2!";
+            break;
         }
     }
-
-
+}
 
