@@ -3,28 +3,30 @@
 using namespace std;
 
 int main() {
-    srand(time(NULL)); 
+    srand(time(NULL));
 
     const int Tableroixj = 10;
     const short tamañoBarcoMenor = 3;
     const short tamañoBarcoMayor = 6;
 
+    char TableroJugador1[Tableroixj][Tableroixj];
+    char TableroJugador2[Tableroixj][Tableroixj];
+
     short tableroCompleto = 0;
-    for (int i = tamañoBarcoMenor; i <= tamañoBarcoMayor; i++) { 
+    for (int i = tamañoBarcoMenor; i <= tamañoBarcoMayor; i++) {
         tableroCompleto += i;
     }
-
-    cout << "------------------" << endl;
-    cout << "Tablero jugador 1: " << endl;
-    cout << "------------------" << endl;
-
-    char TableroJugador1[Tableroixj][Tableroixj];
 
     for (int i = 0; i < Tableroixj; i++) {
         for (int j = 0; j < Tableroixj; j++) {
             TableroJugador1[i][j] = '~';
+            TableroJugador2[i][j] = '~';
         }
     }
+
+
+    //UINICIALIZAR TABLE J1
+
     for (int i = tamañoBarcoMenor; i <= tamañoBarcoMayor; i++) {
         bool posicionado = false;
         char tamañoBarco = i + '0';
@@ -82,28 +84,8 @@ int main() {
             }
         }
     }
-    for (int i = 0; i < Tableroixj; i++) {
 
-        for (int j = 0; j < Tableroixj; j++) {
-            cout << TableroJugador1[i][j] << " ";
-        }
-
-        cout << endl;
-    }
-
-    cout << endl << endl;
-
-    cout << "------------------" << endl;
-    cout << "Tablero jugador 2: " << endl;
-    cout << "------------------" << endl;
-    char TableroJugador2[Tableroixj][Tableroixj];
-    for (int i = 0; i < Tableroixj; i++) {
-        for (int j = 0; j < Tableroixj; j++) {
-            TableroJugador2[i][j] = '~';
-        }
-    }
-
-    for (int i = tamañoBarcoMenor; i <= tamañoBarcoMayor; i++) { 
+    for (int i = tamañoBarcoMenor; i <= tamañoBarcoMayor; i++) {
         bool posicionado = false;
         char tamañoBarco = i + '0';
 
@@ -160,6 +142,26 @@ int main() {
             }
         }
     }
+    cout << "------------------" << endl;
+    cout << "Tablero jugador 1: " << endl;
+    cout << "------------------" << endl;
+
+    for (int i = 0; i < Tableroixj; i++) {
+
+        for (int j = 0; j < Tableroixj; j++) {
+            cout << TableroJugador1[i][j] << " ";
+        }
+
+        cout << endl;
+    }
+
+    cout << endl << endl;
+
+    cout << "------------------" << endl;
+    cout << "Tablero jugador 2: " << endl;
+    cout << "------------------" << endl;
+
+    
 
 
     for (int i = 0; i < Tableroixj; i++) {
@@ -223,7 +225,7 @@ int main() {
                     acierto = true;
 
                 }
-            } while (acierto == false);
+            } while (!acierto );
 
             if (acierto) {
 
