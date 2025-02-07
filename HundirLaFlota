@@ -3,10 +3,21 @@
 using namespace std;
 
 int main() {
-    const int Tableroixj = 10;
-    srand(time(NULL));
+    srand(time(NULL)); 
 
+    const int Tableroixj = 10;
+    const short tamañoBarcoMenor = 3;
+    const short tamañoBarcoMayor = 6;
+
+    short tableroCompleto = 0;
+    for (int i = tamañoBarcoMenor; i <= tamañoBarcoMayor; i++) { 
+        tableroCompleto += i;
+    }
+
+    cout << "------------------" << endl;
     cout << "Tablero jugador 1: " << endl;
+    cout << "------------------" << endl;
+
     char TableroJugador1[Tableroixj][Tableroixj];
 
     for (int i = 0; i < Tableroixj; i++) {
@@ -14,7 +25,7 @@ int main() {
             TableroJugador1[i][j] = '~';
         }
     }
-    for (int i = 3; i <= 6; i++) {
+    for (int i = tamañoBarcoMenor; i <= tamañoBarcoMayor; i++) {
         bool posicionado = false;
         char tamañoBarco = i + '0';
 
@@ -82,8 +93,9 @@ int main() {
 
     cout << endl << endl;
 
-
+    cout << "------------------" << endl;
     cout << "Tablero jugador 2: " << endl;
+    cout << "------------------" << endl;
     char TableroJugador2[Tableroixj][Tableroixj];
     for (int i = 0; i < Tableroixj; i++) {
         for (int j = 0; j < Tableroixj; j++) {
@@ -91,7 +103,7 @@ int main() {
         }
     }
 
-    for (int i = 3; i <= 6; i++) {
+    for (int i = tamañoBarcoMenor; i <= tamañoBarcoMayor; i++) { 
         bool posicionado = false;
         char tamañoBarco = i + '0';
 
@@ -170,9 +182,12 @@ int main() {
         int fila;
         int columna;
         bool turno = true;
-       
+
         while (turno) {
-            cout << "Turno Jugador 1" << endl;
+            cout << "------------------" << endl;
+            cout << " Turno Jugador 1:" << endl;
+            cout << "------------------" << endl;
+
             for (int i = 0; i < Tableroixj; i++) {
                 for (int j = 0; j < Tableroixj; j++) {
                     if (TableroJugador2[i][j] == 'X' || TableroJugador2[i][j] == 'O') {
@@ -236,7 +251,9 @@ int main() {
         turno = true;
         acierto = false;
         while (turno) {
-            cout << "Turno Jugador 2" << endl;
+            cout << "------------------" << endl;
+            cout << " Turno Jugador 2: " << endl;
+            cout << "------------------" << endl;
             for (int i = 0; i < Tableroixj; i++) {
                 for (int j = 0; j < Tableroixj; j++) {
                     if (TableroJugador1[i][j] == 'X' || TableroJugador1[i][j] == 'O') {
@@ -282,7 +299,7 @@ int main() {
                 }
                 else if (TableroJugador1[fila][columna] != 'X' && TableroJugador1[fila][columna] != 'O') {
                     cout << "¡Acertaste!" << endl;
-                    aciertosJ2++; 
+                    aciertosJ2++;
                     TableroJugador1[fila][columna] = 'O';
 
                     turno = false;
@@ -296,14 +313,14 @@ int main() {
         }
         turno = false;
 
-        if (aciertosJ1 == 18) {
+
+        if (aciertosJ1 == tableroCompleto) {
             cout << "Has ganado la partida Jugador 1!";
             break;
         }
-        else if (aciertosJ2 == 18) {
+        else if (aciertosJ2 == tableroCompleto) {
             cout << "Has ganado la partida Jugador 2!";
             break;
         }
     }
 }
-
