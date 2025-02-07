@@ -8,28 +8,30 @@ int main() {
     const int Tableroixj = 10;
     const short tamañoBarcoMenor = 3;
     const short tamañoBarcoMayor = 6;
-
+    const char impacto = 'O';
+    const char fallo = 'X';
+    const char agua = '~';
+    short tableroCompleto = 0;  
     char TableroJugador1[Tableroixj][Tableroixj];
     char TableroJugador2[Tableroixj][Tableroixj];
 
-    short tableroCompleto = 0;
-    for (int i = tamañoBarcoMenor; i <= tamañoBarcoMayor; i++) {
+    for (int i = tamañoBarcoMenor; i <= tamañoBarcoMayor; i++) { // bucle para contar la cantidad de casillas ocupadas por barcos (para la comprobacion de victoria)
         tableroCompleto += i;
     }
 
-    for (int i = 0; i < Tableroixj; i++) {
+    for (int i = 0; i < Tableroixj; i++) { // doble bucle for para inicializar ambos tableros
         for (int j = 0; j < Tableroixj; j++) {
-            TableroJugador1[i][j] = '~';
-            TableroJugador2[i][j] = '~';
+            TableroJugador1[i][j] = agua;
+            TableroJugador2[i][j] = agua;
         }
     }
 
 
-    //UINICIALIZAR TABLE J1
+    //INICIALIZAR TABLERO J1 CON BARCOS RANDOMIZADOS
 
     for (int i = tamañoBarcoMenor; i <= tamañoBarcoMayor; i++) {
         bool posicionado = false;
-        char tamañoBarco = i + '0';
+        char tamañoBarco = i + '0'; // casteo para que el numero del barco se convierta a char y pueda ser introducido en el tablero
 
         while (!posicionado) {
             int filaInicial = rand() % Tableroixj;
@@ -38,12 +40,12 @@ int main() {
             bool valido = true;
 
 
-            if (orientacion == 0) {
+            if (!orientacion) { // orientacion horizontal
                 if (columnaInicial + i > Tableroixj) {
                     valido = false;
                 }
             }
-            else {
+            else { // orientacion vertical
                 if (filaInicial + i > Tableroixj) {
                     valido = false;
                 }
@@ -51,9 +53,9 @@ int main() {
 
             if (valido) {
                 bool colision = false;
-                if (orientacion == 0) {
+                if (!orientacion) {
                     for (int j = 0; j < i; j++) {
-                        if (TableroJugador1[filaInicial][columnaInicial + j] != '~') {
+                        if (TableroJugador1[filaInicial][columnaInicial + j] != agua) { 
                             colision = true;
                             break;
                         }
@@ -68,7 +70,7 @@ int main() {
                 }
                 else {
                     for (int k = 0; k < i; k++) {
-                        if (TableroJugador1[filaInicial + k][columnaInicial] != '~') {
+                        if (TableroJugador1[filaInicial + k][columnaInicial] != agua) {
                             colision = true;
                             break;
                         }
@@ -85,9 +87,10 @@ int main() {
         }
     }
 
+    //INICIALIZAR TABLERO J2 CON BARCOS RANDOMIZADOS
     for (int i = tamañoBarcoMenor; i <= tamañoBarcoMayor; i++) {
         bool posicionado = false;
-        char tamañoBarco = i + '0';
+        char tamañoBarco = i + '0'; // casteo para que el numero del barco se convierta a char y pueda ser introducido en el tablero
 
         while (!posicionado) {
             int filaInicial = rand() % Tableroixj;
@@ -96,12 +99,12 @@ int main() {
             bool valido = true;
 
 
-            if (orientacion == 0) {
+            if (!orientacion) { // orientacion horizontal
                 if (columnaInicial + i > Tableroixj) {
                     valido = false;
                 }
             }
-            else {
+            else { // orientacion vertical
                 if (filaInicial + i > Tableroixj) {
                     valido = false;
                 }
@@ -109,9 +112,9 @@ int main() {
 
             if (valido) {
                 bool colision = false;
-                if (orientacion == 0) {
+                if (!orientacion) {
                     for (int j = 0; j < i; j++) {
-                        if (TableroJugador2[filaInicial][columnaInicial + j] != '~') {
+                        if (TableroJugador2[filaInicial][columnaInicial + j] != agua) {
                             colision = true;
                             break;
                         }
@@ -126,7 +129,7 @@ int main() {
                 }
                 else {
                     for (int k = 0; k < i; k++) {
-                        if (TableroJugador2[filaInicial + k][columnaInicial] != '~') {
+                        if (TableroJugador2[filaInicial + k][columnaInicial] != agua) {
                             colision = true;
                             break;
                         }
@@ -161,7 +164,7 @@ int main() {
     cout << "Tablero jugador 2: " << endl;
     cout << "------------------" << endl;
 
-    
+
 
 
     for (int i = 0; i < Tableroixj; i++) {
@@ -186,18 +189,19 @@ int main() {
         bool turno = true;
 
         while (turno) {
+            bool turno = false;
             cout << "------------------" << endl;
             cout << " Turno Jugador 1:" << endl;
             cout << "------------------" << endl;
 
             for (int i = 0; i < Tableroixj; i++) {
                 for (int j = 0; j < Tableroixj; j++) {
-                    if (TableroJugador2[i][j] == 'X' || TableroJugador2[i][j] == 'O') {
+                    if (TableroJugador2[i][j] == fallo || TableroJugador2[i][j] == impacto) {
                         cout << TableroJugador2[i][j];
 
                     }
                     else {
-                        cout << '~';
+                        cout << agua; 
                     }
                     if (j < Tableroixj - 1)
                     {
@@ -218,29 +222,29 @@ int main() {
 
 
                 if (fila < 0 || fila >= Tableroixj || columna < 0 || columna >= Tableroixj) {
-                    cout << "Disparo fuera del tablero (ERROR EN FILA)" << endl;
+                    cout << "Disparo fuera del tablero, vuelve a probar" << endl;
                     acierto = false;
                 }
                 else {
                     acierto = true;
 
                 }
-            } while (!acierto );
+            } while (!acierto);
 
             if (acierto) {
 
-                if (TableroJugador2[fila][columna] == '~') {
-                    cout << "¡Fallaste!" << endl;
-                    TableroJugador2[fila][columna] = 'X';
-                    turno = false;
+                if (TableroJugador2[fila][columna] == agua) {
+                    cout << "Fallaste!" << endl;
+                    TableroJugador2[fila][columna] = fallo;
+
 
                 }
-                else if (TableroJugador2[fila][columna] != 'X' && TableroJugador2[fila][columna] != 'O') {
-                    cout << "¡Acertaste!" << endl;
-                    TableroJugador2[fila][columna] = 'O';
+                else if (TableroJugador2[fila][columna] != fallo && TableroJugador2[fila][columna] != impacto) {
+                    cout << "Acertaste!" << endl;
+                    TableroJugador2[fila][columna] = impacto;
                     aciertosJ1++;
 
-                    turno = false;
+
                 }
                 else {
                     cout << "Ya disparaste en esa posicion, vuelve a probar" << endl;
@@ -253,17 +257,18 @@ int main() {
         turno = true;
         acierto = false;
         while (turno) {
+            bool turno = false;
             cout << "------------------" << endl;
             cout << " Turno Jugador 2: " << endl;
             cout << "------------------" << endl;
             for (int i = 0; i < Tableroixj; i++) {
                 for (int j = 0; j < Tableroixj; j++) {
-                    if (TableroJugador1[i][j] == 'X' || TableroJugador1[i][j] == 'O') {
+                    if (TableroJugador1[i][j] == fallo || TableroJugador1[i][j] == impacto) {
                         cout << TableroJugador1[i][j];
 
                     }
                     else {
-                        cout << '~';
+                        cout << agua;
                     }
                     if (j < Tableroixj - 1)
                     {
@@ -283,28 +288,25 @@ int main() {
 
 
                 if (fila < 0 || fila >= Tableroixj || columna < 0 || columna >= Tableroixj) {
-                    cout << "Disparo fuera del tablero (ERROR EN FILA)" << endl;
+                    cout << "Disparo fuera del tablero, vuelve a probar" << endl;
                     acierto = false;
                 }
                 else {
                     acierto = true;
                 }
-            } while (acierto == false);
+            } while (!acierto);
 
             if (acierto) {
 
-                if (TableroJugador1[fila][columna] == '~') {
-                    cout << "¡Fallaste!" << endl;
-                    TableroJugador1[fila][columna] = 'X';
-                    turno = false;
+                if (TableroJugador1[fila][columna] == agua) {
+                    cout << "Fallaste!" << endl;
+                    TableroJugador1[fila][columna] = fallo;
 
                 }
-                else if (TableroJugador1[fila][columna] != 'X' && TableroJugador1[fila][columna] != 'O') {
-                    cout << "¡Acertaste!" << endl;
+                else if (TableroJugador1[fila][columna] != fallo && TableroJugador1[fila][columna] != impacto) {
+                    cout << "Acertaste!" << endl;
                     aciertosJ2++;
-                    TableroJugador1[fila][columna] = 'O';
-
-                    turno = false;
+                    TableroJugador1[fila][columna] = impacto;
                 }
                 else {
                     cout << "Ya disparaste en esa posicion, vuelve a probar" << endl;
@@ -317,11 +319,11 @@ int main() {
 
 
         if (aciertosJ1 == tableroCompleto) {
-            cout << "Has ganado la partida Jugador 1!";
+            cout << "Jugador 1: HA GANADO LA PARTIDA!!!!";
             break;
         }
         else if (aciertosJ2 == tableroCompleto) {
-            cout << "Has ganado la partida Jugador 2!";
+            cout << "Jugador 2: HA GANADO LA PARTIDA!!!!";
             break;
         }
     }
