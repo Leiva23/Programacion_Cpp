@@ -189,7 +189,7 @@ int main() {
         bool turno = true;
 
         while (turno) {
-            bool turno = false;
+            turno = false;
             cout << "------------------" << endl;
             cout << " Turno Jugador 1:" << endl;
             cout << "------------------" << endl;
@@ -257,7 +257,7 @@ int main() {
         turno = true;
         acierto = false;
         while (turno) {
-            bool turno = false;
+            turno = false;
             cout << "------------------" << endl;
             cout << " Turno Jugador 2: " << endl;
             cout << "------------------" << endl;
@@ -270,7 +270,7 @@ int main() {
                     else {
                         cout << agua;
                     }
-                    if (j < Tableroixj - 1)
+                    if (j < Tableroixj - 1) // parap asignar un espacio entre cada ~ menos en la ultima posicion
                     {
                         cout << " ";
                     }
@@ -319,12 +319,101 @@ int main() {
 
 
         if (aciertosJ1 == tableroCompleto) {
-            cout << "Jugador 1: HA GANADO LA PARTIDA!!!!";
+            cout << "Jugador 1: HA GANADO LA PARTIDA!!!!" << endl;
+            system("cls");
+            cout << "--------------------" << endl;
+            cout << " Ganador Jugador 1:" << endl;
+            cout << "--------------------" << endl;
+
+            for (int i = 0; i < Tableroixj; i++) {
+                for (int j = 0; j < Tableroixj; j++) {
+                    if (TableroJugador1[i][j] == fallo || TableroJugador1[i][j] == impacto) {
+                        cout << TableroJugador1[i][j];
+
+                    }
+                    else {
+                        cout << agua;
+                    }
+                    if (j < Tableroixj - 1)
+                    {
+                        cout << " ";
+                    }
+
+                }
+                cout << endl;
+            }
+
+            cout << "--------------------" << endl;
+            cout << " Perdedor Jugador 2:" << endl;
+            cout << "--------------------" << endl;
+
+            for (int i = 0; i < Tableroixj; i++) {
+                for (int j = 0; j < Tableroixj; j++) {
+                    if (TableroJugador2[i][j] == fallo || TableroJugador2[i][j] == impacto) {
+                        cout << TableroJugador2[i][j];
+
+                    }
+                    else {
+                        cout << agua;
+                    }
+                    if (j < Tableroixj - 1)
+                    {
+                        cout << " ";
+                    }
+
+                }
+                cout << endl;
+            }
             break;
         }
         else if (aciertosJ2 == tableroCompleto) {
-            cout << "Jugador 2: HA GANADO LA PARTIDA!!!!";
+            system("cls");
+            cout << "Jugador 2: HA GANADO LA PARTIDA!!!!" << endl;
+            cout << "--------------------" << endl;
+            cout << " Ganador Jugador 2:" << endl;
+            cout << "--------------------" << endl;
+
+            for (int i = 0; i < Tableroixj; i++) {
+                for (int j = 0; j < Tableroixj; j++) {
+                    if (TableroJugador2[i][j] == fallo || TableroJugador2[i][j] == impacto) {
+                        cout << TableroJugador2[i][j];
+
+                    }
+                    else {
+                        cout << agua;
+                    }
+                    if (j < Tableroixj - 1)
+                    {
+                        cout << " ";
+                    }
+
+                }
+                cout << endl;
+            }
+
+            cout << "--------------------" << endl;
+            cout << " Perdedor Jugador 1:" << endl;
+            cout << "--------------------" << endl;
+
+            for (int i = 0; i < Tableroixj; i++) {
+                for (int j = 0; j < Tableroixj; j++) {
+                    if (TableroJugador1[i][j] == fallo || TableroJugador1[i][j] == impacto) {
+                        cout << TableroJugador1[i][j];
+
+                    }
+                    else {
+                        cout << agua;
+                    }
+                    if (j < Tableroixj - 1)
+                    {
+                        cout << " ";
+                    }
+
+                }
+                cout << endl;
+            }
             break;
+
         }
     }
 }
