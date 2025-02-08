@@ -11,8 +11,8 @@ int main() {
     const char impacto = 'O';
     const char fallo = 'X';
     const char agua = '~';
-    short tableroCompleto = 0;  
-    char TableroJugador1[Tableroixj][Tableroixj];
+    short tableroCompleto = 0;
+    char TableroJugador1[Tableroixj][Tableroixj]; // inicializo las variables del tablero
     char TableroJugador2[Tableroixj][Tableroixj];
 
     for (int i = tamañoBarcoMenor; i <= tamañoBarcoMayor; i++) { // bucle para contar la cantidad de casillas ocupadas por barcos (para la comprobacion de victoria)
@@ -41,34 +41,34 @@ int main() {
 
 
             if (!orientacion) { // orientacion horizontal
-                if (columnaInicial + i > Tableroixj) {
+                if (columnaInicial + i > Tableroixj) { // comprobamos que el barco no sobresalga del tablero por el borde derecho
                     valido = false;
                 }
             }
             else { // orientacion vertical
-                if (filaInicial + i > Tableroixj) {
+                if (filaInicial + i > Tableroixj) { // comprobamos que el barco no sobresalgo por la parte inferior
                     valido = false;
                 }
             }
 
             if (valido) {
                 bool colision = false;
-                if (!orientacion) {
+                if (!orientacion) { // si la orientacion es horizontal sumaremos el barco en el numero de columnas
                     for (int j = 0; j < i; j++) {
-                        if (TableroJugador1[filaInicial][columnaInicial + j] != agua) { 
+                        if (TableroJugador1[filaInicial][columnaInicial + j] != agua) { // si alguna posicion del barco cae en una zona sin agua es que hay una colision
                             colision = true;
                             break;
                         }
                     }
                     if (!colision) {
                         for (int j = 0; j < i; j++) {
-                            TableroJugador1[filaInicial][columnaInicial + j] = tamañoBarco;
+                            TableroJugador1[filaInicial][columnaInicial + j] = tamañoBarco; // si no hay colision posicionamos el barco
                         }
-                        posicionado = true;
+                        posicionado = true; // marcamos que este barco ya ha sido posicionado
                     }
 
                 }
-                else {
+                else { // la orientacion es verical, repetimos las comprobaciones
                     for (int k = 0; k < i; k++) {
                         if (TableroJugador1[filaInicial + k][columnaInicial] != agua) {
                             colision = true;
@@ -145,6 +145,8 @@ int main() {
             }
         }
     }
+
+    // mostramos en pantalla ambos tableros con los barcos posicionados
     cout << "------------------" << endl;
     cout << "Tablero jugador 1: " << endl;
     cout << "------------------" << endl;
@@ -164,9 +166,6 @@ int main() {
     cout << "Tablero jugador 2: " << endl;
     cout << "------------------" << endl;
 
-
-
-
     for (int i = 0; i < Tableroixj; i++) {
 
         for (int j = 0; j < Tableroixj; j++) {
@@ -176,34 +175,35 @@ int main() {
         cout << endl;
     }
 
-    system("pause");
-    system("cls");
+    system("pause"); // pausamos la ejecucion para que los jugadores puedan ver la posicion de los barcos antes de la partida
+    system("cls"); // limpiamos la pantalla
 
     bool gameplay = true;
     bool acierto = false;
     short aciertosJ1 = 0;
     short aciertosJ2 = 0;
+
     while (gameplay) {
         int fila;
         int columna;
         bool turno = true;
 
-        while (turno) {
+        while (turno) { // iniciamos con el turno de J1 y mostramos en pantalla el tablero del oponente
             turno = false;
             cout << "------------------" << endl;
             cout << " Turno Jugador 1:" << endl;
             cout << "------------------" << endl;
 
-            for (int i = 0; i < Tableroixj; i++) {
+            for (int i = 0; i < Tableroixj; i++) { // recoorremos las posiciones del tablero y ocultamos todo aquello que no sea un disparo, para ocultar los barcos
                 for (int j = 0; j < Tableroixj; j++) {
                     if (TableroJugador2[i][j] == fallo || TableroJugador2[i][j] == impacto) {
                         cout << TableroJugador2[i][j];
 
                     }
                     else {
-                        cout << agua; 
+                        cout << agua;
                     }
-                    if (j < Tableroixj - 1)
+                    if (j < Tableroixj - 1) // añadimos un espacio entra cada posicion para mejorar la visibilidad menoss en la ultima posicion
                     {
                         cout << " ";
                     }
@@ -221,7 +221,7 @@ int main() {
                 columna--;
 
 
-                if (fila < 0 || fila >= Tableroixj || columna < 0 || columna >= Tableroixj) {
+                if (fila < 0 || fila >= Tableroixj || columna < 0 || columna >= Tableroixj) { // comprobacion de si el disparo va fuera del tablero
                     cout << "Disparo fuera del tablero, vuelve a probar" << endl;
                     acierto = false;
                 }
@@ -229,34 +229,34 @@ int main() {
                     acierto = true;
 
                 }
-            } while (!acierto);
+            } while (!acierto); // obligamos a repetir hasta que el usuario introduzca unas coordenadas validas
 
             if (acierto) {
 
-                if (TableroJugador2[fila][columna] == agua) {
+                if (TableroJugador2[fila][columna] == agua) { // si la posicion en la que dispara hay agua hay un fallo y se asigna una X
                     cout << "Fallaste!" << endl;
                     TableroJugador2[fila][columna] = fallo;
 
 
                 }
-                else if (TableroJugador2[fila][columna] != fallo && TableroJugador2[fila][columna] != impacto) {
+                else if (TableroJugador2[fila][columna] != fallo && TableroJugador2[fila][columna] != impacto) { // si no hay agua, X ni O significa que no disparo nunca en esa posicion y que ha dado en el blanco
                     cout << "Acertaste!" << endl;
                     TableroJugador2[fila][columna] = impacto;
-                    aciertosJ1++;
+                    aciertosJ1++; // si acierta se suma al contador de aciertos 
 
 
                 }
-                else {
+                else { // cualquier otra opcion seria que ya disparo en esa posicion
                     cout << "Ya disparaste en esa posicion, vuelve a probar" << endl;
-                    turno = true;
+                    turno = true; // asignamos true en el bucle para que repita el proceso hasta que haga un disparo valido
                 }
 
             }
         }
 
-        turno = true;
+        turno = true; // asignamos true para que se pueda inicializar el siguiente bucle del turno J2
         acierto = false;
-        while (turno) {
+        while (turno) { // repetimos el sistema de gameplay del J1
             turno = false;
             cout << "------------------" << endl;
             cout << " Turno Jugador 2: " << endl;
@@ -270,7 +270,7 @@ int main() {
                     else {
                         cout << agua;
                     }
-                    if (j < Tableroixj - 1) // parap asignar un espacio entre cada ~ menos en la ultima posicion
+                    if (j < Tableroixj - 1) // para asignar un espacio entre cada ~ menos en la ultima posiciion
                     {
                         cout << " ";
                     }
@@ -318,10 +318,57 @@ int main() {
         turno = false;
 
 
-        if (aciertosJ1 == tableroCompleto) {
-            cout << "Jugador 1: HA GANADO LA PARTIDA!!!!" << endl;
+        if (aciertosJ1 == tableroCompleto && aciertosJ2 == tableroCompleto) {
             system("cls");
+            cout << "VAYA HABEIS EMPATADO!!!!" << endl << "Jugar otra partida para encontrar al vencedor!!" << endl;
+            cout << "--------------------" << endl; // mostramos tableros de ambos jugadores
+            cout << " Tablero Jugador 1:" << endl;
             cout << "--------------------" << endl;
+
+            for (int i = 0; i < Tableroixj; i++) {
+                for (int j = 0; j < Tableroixj; j++) {
+                    if (TableroJugador1[i][j] == fallo || TableroJugador1[i][j] == impacto) {
+                        cout << TableroJugador1[i][j];
+
+                    }
+                    else {
+                        cout << agua;
+                    }
+                    if (j < Tableroixj - 1)
+                    {
+                        cout << " ";
+                    }
+
+                }
+                cout << endl;
+            }
+            cout << "--------------------" << endl; 
+            cout << " Tablero Jugador 2:" << endl; 
+            cout << "--------------------" << endl; 
+
+            for (int i = 0; i < Tableroixj; i++) {
+                for (int j = 0; j < Tableroixj; j++) {
+                    if (TableroJugador2[i][j] == fallo || TableroJugador2[i][j] == impacto) {
+                        cout << TableroJugador2[i][j];
+
+                    }
+                    else {
+                        cout << agua;
+                    }
+                    if (j < Tableroixj - 1)
+                    {
+                        cout << " ";
+                    }
+
+                }
+                cout << endl;
+            }
+            break;
+        }
+        else if (aciertosJ1 == tableroCompleto) { // comprobamos que el numero de aciertos sea igual a la cantidad de barcos posicionados
+            cout << "Jugador 1: HA GANADO LA PARTIDA!!!!" << endl;
+            system("cls"); // limpiamos la pantalla
+            cout << "--------------------" << endl; // mostramos el tablero de ambos jugadores con un mensaje de victoria y derrota
             cout << " Ganador Jugador 1:" << endl;
             cout << "--------------------" << endl;
 
@@ -366,10 +413,10 @@ int main() {
             }
             break;
         }
-        else if (aciertosJ2 == tableroCompleto) {
+        else if (aciertosJ2 == tableroCompleto) { // misma comprobacion pero para el J2
             system("cls");
             cout << "Jugador 2: HA GANADO LA PARTIDA!!!!" << endl;
-            cout << "--------------------" << endl;
+            cout << "--------------------" << endl; // mostramos tableros de ganador y perdedor
             cout << " Ganador Jugador 2:" << endl;
             cout << "--------------------" << endl;
 
@@ -415,5 +462,6 @@ int main() {
             break;
 
         }
+
     }
 }
