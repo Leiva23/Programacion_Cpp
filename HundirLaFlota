@@ -38,7 +38,7 @@ cout << " |_|  |_|\\____/|_| \\_|_____/_____|_|  \\_\\ |______/_/    \\_\\ |_|  
 
 cout << endl;
 cout << "Jugadores, Bienvenidos al Hundir La Flota" << endl << endl;
-cout << "El juego es para 2 jugadores, se randomizaran ñas posiciones de los barcos y podreis verlos unicamente al comenzar el juego" << endl;
+cout << "El juego es para 2 jugadores, se randomizaran las posiciones de los barcos y podreis verlos unicamente al comenzar el juego" << endl;
 cout << "Si disparais fuera del tablero o sobre un disparo anterior no se os penalizara y podreis repetir el disparo" << endl;
 cout << "Gana el primer jugador en hundir todos los barcos del oponente" << endl << endl; 
 cout << "Buena Suerte!" << endl;
