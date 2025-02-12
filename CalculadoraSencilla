@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+
+int main (){
+    
+    float numero1;
+    float numero2;
+    char calculo;
+    
+    cout << "Introduce un numero" << endl;
+    cin >> numero1;
+    cout << "Introduce el operador (+, -, *, /): " << endl;
+    cin >> calculo;    
+    cout << "Introduce un segundo numero" << endl;
+    cin >> numero2;
+    
+    switch (calculo){
+        
+        case '+': 
+            cout << "Resultado: " << numero1 + numero2 << endl;
+            break;
+            
+        case '-': 
+            cout << "Resultado: " << numero1 - numero2 << endl;
+            break;
+            
+        case '*': 
+            cout << "Resultado: " << numero1 * numero2 << endl;
+            break;
+            
+        case '/': 
+            cout << "Resultado: " << numero1 / numero2 << endl;
+            break;
+            
+        default:
+            cout << "La operacion es demasiado compleja o incorrecta" << endl;
+            break;
+    }
+    
+    return 0;
+}
