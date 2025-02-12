@@ -3,85 +3,105 @@
 #include <string>
 using namespace std;
 
-int main () {
+int main() {
     srand(time(NULL));
-    cout << "Bienvenido al generador de contraseñas KERBERUS: " <<endl;
+    cout << "Bienvenido al generador de contraseñas KERBERUS: " << endl;
+
     string posibilidades = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+=-";
     int indice;
     int longitud;
-    bool aceptable = false; 
+    bool aceptable = false;
     string nuevapassword, password1, password2, password3, password4, password5;
+    string nuevoUsuario, usuario1, usuario2, usuario3, usuario4, usuario5;
     short contador = 0;
     short accion;
-    
-    
-while (true){   
-    cout << "Que deseas haccer?" << endl <<  "1. Generar una contraseña" << endl << "2. visualizar las passwords almacenadas" << endl << "3. Salir" << endl;
-    cin >> accion;
-    
-    if (accion ==1 ){
-        
-    do{
-    cout << "Introduce la longitud de la contraseña (10-100): " << endl;
-    cin >> longitud;
-    
-    if (longitud >= 10 && longitud <= 100){
-        aceptable =true;
-        
-    }else{
-        cout << "La longitud no esta en los limites establecidos" << endl;
-        aceptable = false;
-    }
-    
-    }while (!aceptable);
 
+    while (true) {
+        cout << "\nQue deseas haccer?" << endl;
+        cout << "1. Generar una contraseña" << endl;
+        cout << "2. visualizar las passwords almacenadas" << endl;
+        cout << "3. Salir" << endl;
+        cin >> accion;
 
-    if (aceptable){
-        if (contador >=5){
-            cout << "Has alcanzado el numero maximo de contraseñas";
-        }else{
-        
-        for (int i = 0; i< longitud; i++){
-            indice = rand () % posibilidades.length();
-            nuevapassword += posibilidades[indice];
-        }
-        
-        cout << "Aqui tienes tu contraseña generada: " << nuevapassword;
-        contador++; 
-        
-         if (contador == 0) {
-                password1 = nuevapassword;
-            } else if (contador == 1) {
-                password2 = nuevapassword;
-            } else if (contador == 2) {
-                password3 = nuevapassword;
-            } else if (contador == 3) {
-                password4 = nuevapassword;
-            } else if (contador == 4) {
-                password5 = nuevapassword;
+        if (accion == 1) {
+            do {
+                cout << "Introduce la longitud de la contraseña (10-100): " << endl;
+                cin >> longitud;
+
+                if (longitud >= 10 && longitud <= 100) {
+                    aceptable = true;
+
+                } else {
+                    cout << "La longitud no esta en los limites establecidos" << endl;
+                    aceptable = false;
+                }
+
+            } while (!aceptable);
+
+            cout << "Introduce un usuario o URL al que asociar la contraseña" << endl;
+            cin >> nuevoUsuario;
+
+            if (aceptable) {
+                if (contador >= 5) {
+                    cout << "Has alcanzado el numero maximo de contraseñas";
+                } else {
+                    for (int i = 0; i < longitud; i++) {
+                        indice = rand() % posibilidades.length();
+                        nuevapassword += posibilidades[indice];
+                    }
+
+                    cout << "Aqui tienes tu contraseña generada: " << nuevapassword;
+
+                    if (contador == 0) {
+                        usuario1 = nuevoUsuario;
+                        password1 = nuevapassword;
+                    } else if (contador == 1) {
+                        usuario2 = nuevoUsuario;
+                        password2 = nuevapassword;
+                    } else if (contador == 2) {
+                        usuario3 = nuevoUsuario;
+                        password3 = nuevapassword;
+                    } else if (contador == 3) {
+                        usuario4 = nuevoUsuario;
+                        password4 = nuevapassword;
+                    } else if (contador == 4) {
+                        usuario5 = nuevoUsuario;
+                        password5 = nuevapassword;
+                    }
+
+                    contador++;
+                    nuevapassword = "";
+                }
             }
-        
+            cout << endl;
+
+        } else if (accion == 2) {
+            cout << "Contraseña 1: " << endl
+                 << "Usuario: " << usuario1 << endl
+                 << "Contraseña: " << password1 << endl << endl;
+
+            cout << "Contraseña 2: " << endl
+                 << "Usuario: " << usuario2 << endl
+                 << "Contraseña: " << password2 << endl << endl;
+
+            cout << "Contraseña 3: " << endl
+                 << "Usuario: " << usuario3 << endl
+                 << "Contraseña: " << password3 << endl << endl;
+
+            cout << "Contraseña 4: " << endl
+                 << "Usuario: " << usuario4 << endl
+                 << "Contraseña: " << password4 << endl << endl;
+
+            cout << "Contraseña 5: " << endl
+                 << "Usuario: " << usuario5 << endl
+                 << "Contraseña: " << password5 << endl << endl;
+
+            cout << endl;
+
+        } else if (accion == 3) {
+            break;
         }
-
-        
     }
-    cout << endl;
-    
-    } else if (accion == 2){
-        
-        cout << "Contraseña 1: " << password1 << endl;
-        cout << "Contraseña 2: " << password2 << endl;
-        cout << "Contraseña 3: " << password3 << endl;
-        cout << "Contraseña 4: " << password4 << endl;
-        cout << "Contraseña 5: " << password5 << endl;
 
-        cout << endl;
-       
-    }else if (accion==3){
-        break;
-    }
-    
-}
-    
     return 0;
 }
