@@ -6,7 +6,7 @@ using namespace std;
 int main () {
     srand(time(NULL));
     cout << "Bienvenido al generador de contraseñas KERBERUS: " <<endl;
-    string posibilidades = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz0123456789!@#$%^&*()_+=-";
+    string posibilidades = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+=-";
     int indice;
     int longitud;
     bool aceptable = false; 
