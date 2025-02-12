@@ -23,7 +23,6 @@ int main () {
         cout << "La longitud no esta en los limites establecidos" << endl;
         aceptable = false;
     }
-    
     }while (!aceptable);
 
 
