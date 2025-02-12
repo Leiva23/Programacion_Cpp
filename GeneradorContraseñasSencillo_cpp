@@ -17,8 +17,7 @@ int main () {
     cin >> longitud;
     
     if (longitud >= 10 && longitud <= 100){
-        aceptable =true;
-        
+        aceptable =true; 
     }else{
         cout << "La longitud no esta en los limites establecidos" << endl;
         aceptable = false;
