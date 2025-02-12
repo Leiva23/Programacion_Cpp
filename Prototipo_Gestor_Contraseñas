@@ -1,0 +1,105 @@
+#include <iostream>
+#include <time.h>
+#include <string>
+#include <fstream> 
+using namespace std;
+
+int main() {
+    srand(time(NULL));
+    cout << "Bienvenido al generador de contraseñas KERBERUS: " << endl;
+
+    string posibilidades = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+=-";
+    int indice;
+    int longitud;
+    bool aceptable = false;
+    string nuevapassword, password1, password2, password3, password4, password5;
+    string nuevoUsuario, usuario1, usuario2, usuario3, usuario4, usuario5;
+    string texto; 
+    short contador = 0;
+    short accion;
+
+    while (true) {
+        bool posible = true;
+
+        do {
+        cout << "\nQue deseas hacer?" << endl;
+        cout << "1. Generar una contraseña" << endl;
+        cout << "2. visualizar las passwords almacenadas" << endl;
+        cout << "3. Salir" << endl;
+        cin >> accion;
+        system("cls");
+
+        if (accion < 1 || accion >3) {
+            posible = false;
+        }
+
+    }while (!posible);
+
+        if (accion == 1) {
+            do {
+                cout << "Introduce la longitud de la contraseña (10-100): " << endl;
+                cin >> longitud;
+
+                if (longitud >= 10 && longitud <= 100) {
+                    aceptable = true;
+
+                }
+                else {
+                    cout << "La longitud no esta en los limites establecidos" << endl;
+                    aceptable = false;
+                }
+
+            } while (!aceptable);
+
+            cout << "Introduce un usuario o URL al que asociar la contraseña" << endl;
+            cin >> nuevoUsuario;
+
+            if (aceptable) {
+                if (contador >= 5) {
+                    cout << "Has alcanzado el numero maximo de contraseñas";
+                }
+                else {
+
+                    nuevapassword = "";
+                    for (int i = 0; i < longitud; i++) {
+                        indice = rand() % posibilidades.length();
+                        nuevapassword += posibilidades[indice];
+                    }
+                    contador++; 
+
+                    cout << "Aqui tienes tu contraseña generada: " << nuevapassword;
+
+                    ofstream archivo("passwords.txt", ios::app);  
+                    archivo << "Password " << contador << ":\n" << "Password: " << nuevapassword << endl << "Usuario: " << nuevoUsuario << endl;
+
+                    archivo.close(); 
+
+                    
+
+                }
+            }
+            cout << endl;
+
+
+        }
+        else if (accion == 2) {
+            texto = "";
+            string linea;
+
+            ifstream archivo2("passwords.txt");
+            while (getline(archivo2, linea)) {
+                texto = texto + linea + "\n";
+            }
+            archivo2.close();
+                cout << texto << endl;
+
+            cout << endl;
+
+        }
+        else if (accion == 3) {
+            break;
+        }
+    }
+
+    return 0;
+}
