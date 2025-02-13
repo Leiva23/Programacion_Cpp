@@ -70,7 +70,7 @@ int main() {
                     cout << "Aqui tienes tu contraseña generada: " << nuevapassword;
 
                     ofstream archivo("passwords.txt", ios::app);  
-                    archivo << "Password " << contador << ":\n" << "Password: " << nuevapassword << endl << "Usuario: " << nuevoUsuario << endl;
+                    archivo << "Password " << contador << ":\n" << "Password: " << nuevapassword << endl << "Usuario: " << nuevoUsuario << endl << endl;
 
                     archivo.close(); 
 
