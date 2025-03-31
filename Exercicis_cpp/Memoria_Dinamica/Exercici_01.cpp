@@ -1,11 +1,11 @@
-///*
-//Crea un programa que pida un número al usuario, el programa almacenará
-//el número y seguidamente pedirá otro al usuario.Esto debe hacerse
-//infinitamente hasta que el usuario quiera, entonces el programa finalizará
-//mostrando todos los números introducidos.
-//*/
-//
-//
+/*
+Crea un programa que pida un número al usuario, el programa almacenará
+el número y seguidamente pedirá otro al usuario.Esto debe hacerse
+infinitamente hasta que el usuario quiera, entonces el programa finalizará
+mostrando todos los números introducidos.
+*/
+
+
 #include <iostream>
 #include <vector>
 using namespace std;
